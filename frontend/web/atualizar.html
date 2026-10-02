@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Atualizando aplicação</title>
+  <style>
+    /* Mantém a página de atualização legível em celulares e computadores. */
+    body {
+      align-items: center;
+      background: #111827;
+      color: #f9fafb;
+      display: flex;
+      font-family: Arial, sans-serif;
+      justify-content: center;
+      margin: 0;
+      min-height: 100vh;
+      padding: 24px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <p>Atualizando a aplicação. Aguarde...</p>
+  <script>
+    /** Remove a versão web anterior e volta para a aplicação publicada. */
+    async function atualizarAplicacao() {
+      try {
+        if ('serviceWorker' in navigator) {
+          const registros = await navigator.serviceWorker.getRegistrations();
+          await Promise.all(registros.map((registro) => registro.unregister()));
+        }
+
+        if ('caches' in window) {
+          const nomesDosCaches = await caches.keys();
+          await Promise.all(nomesDosCaches.map((nome) => caches.delete(nome)));
+        }
+      } finally {
+        // O parâmetro único obriga o navegador a solicitar o documento mais recente.
+        window.location.replace('/?atualizado=' + Date.now());
+      }
+    }
+
+    atualizarAplicacao();
+  </script>
+</body>
+</html>

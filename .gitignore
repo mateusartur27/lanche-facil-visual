@@ -1,0 +1,15 @@
+# Caches, ferramentas geradas e configuração específica desta máquina.
+**/build/
+**/.dart_tool/
+**/.gradle/
+**/.flutter-plugins*
+**/local.properties
+**/GeneratedPluginRegistrant.java
+*.log
+*.iml
+.idea/
+*.jks
+*.keystore
+.env*
+# O APK fica disponível como arquivo local e no release do GitHub.
+entregas/*.apk
